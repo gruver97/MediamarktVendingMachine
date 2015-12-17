@@ -1,4 +1,6 @@
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using VendingMachine.VendingComponents.Coins;
 using VendingMachine.VendingComponents.Processor;
 using VendingMachine.VendingComponents.ProductStore;
@@ -16,7 +18,15 @@ namespace VendingMachine.ViewModel
             VendingProcessor = new VendingProcessor();
             ProductStore = new ProductStore();
             InitializeClientPurse();
+            ClientCoinExtract = new RelayCommand(MoveClientCoin);
         }
+
+        private void MoveClientCoin()
+        {
+            
+        }
+
+        public ICommand ClientCoinExtract { get; private set; }
 
         private void InitializeClientPurse()
         {

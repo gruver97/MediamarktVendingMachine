@@ -1,4 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using VendingMachine.VendingComponents.Coins;
 
 namespace VendingMachine.VendingComponents.Purse
@@ -15,39 +18,51 @@ namespace VendingMachine.VendingComponents.Purse
                 var coinGroup = new CoinGroup(_coinPrices[i])
                 {
                     Price = _coinPrices[i],
-                    Coins = new ObservableCollection<Coin>()
+                    Coins = new Stack<Coin>()
                 };
                 CoinGroups.Add(coinGroup);
             }
         }
 
-        public ObservableCollection<CoinGroup> CoinGroups { get; set; }
+        public ObservableCollection<CoinGroup> CoinGroups { get; private set; }
 
         public void AddCoin(Coin coin)
         {
-            switch (coin.Price)
+            var groupIndex = GetCoinGroupIndex(coin.Price);
+            CoinGroups[groupIndex].Coins.Push(coin);
+        }
+
+        private int GetCoinGroupIndex(int price)
+        {
+            switch (price)
             {
                 case 1:
-                {
-                    CoinGroups[0].Coins.Add(coin);
-                    break;
-                }
+                    {
+                        return 0;
+                    }
                 case 2:
-                {
-                    CoinGroups[1].Coins.Add(coin);
-                    break;
-                }
+                    {
+                        return 1;
+                    }
                 case 5:
-                {
-                    CoinGroups[2].Coins.Add(coin);
-                    break;
-                }
+                    {
+                        return 2;
+                    }
                 case 10:
-                {
-                    CoinGroups[3].Coins.Add(coin);
-                    break;
-                }
+                    {
+                        return 3;
+                    }
+                default: throw new ArgumentOutOfRangeException();
             }
+        }
+        public Coin GetCoin(int price)
+        {
+            var groupIndex = GetCoinGroupIndex(price);
+            if (CoinGroups[groupIndex].Coins.Any())
+            {
+                return CoinGroups[groupIndex].Coins.Pop();
+            }
+            else return null;
         }
     }
 }

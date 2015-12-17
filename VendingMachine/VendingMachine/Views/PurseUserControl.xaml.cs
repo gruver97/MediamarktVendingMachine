@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using VendingMachine.VendingComponents.Coins;
@@ -30,6 +31,15 @@ namespace VendingMachine.Views
         {
             get { return (bool) GetValue(IsButtonsEnabledProperty); }
             set { SetValue(IsButtonsEnabledProperty, value); }
+        }
+
+        public static readonly DependencyProperty PressCoinCommandProperty = DependencyProperty.Register(
+            "PressCoinCommand", typeof (ICommand), typeof (PurseUserControl), new PropertyMetadata(default(ICommand)));
+
+        public ICommand PressCoinCommand
+        {
+            get { return (ICommand) GetValue(PressCoinCommandProperty); }
+            set { SetValue(PressCoinCommandProperty, value); }
         }
     }
 }
