@@ -1,27 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using VendingMachine.Annotations;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace VendingMachine.Views
 {
-    public sealed partial class SumUserControl : UserControl
+    public sealed partial class SumUserControl : UserControl, INotifyPropertyChanged
     {
+        
         public SumUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public static readonly DependencyProperty DepositProperty = DependencyProperty.Register(
+            "Deposit", typeof (int), typeof (SumUserControl), new PropertyMetadata(default(int)));
+
+        public int Deposit
+        {
+            get { return (int) GetValue(DepositProperty); }
+            set { SetValue(DepositProperty, value); }
         }
     }
 }

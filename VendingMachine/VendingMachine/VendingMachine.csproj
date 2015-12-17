@@ -109,10 +109,12 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendingComponents\Coin.cs" />
     <Compile Include="VendingComponents\CoinLoader\ICoinLoader.cs" />
     <Compile Include="VendingComponents\Processor\IProcessor.cs" />
+    <Compile Include="VendingComponents\Processor\VendingProcessor.cs" />
     <Compile Include="VendingComponents\ProductStore\IStore.cs" />
     <Compile Include="VendingComponents\ProductStore\Product.cs" />
     <Compile Include="VendingComponents\Purse\IPurse.cs" />

@@ -7,6 +7,5 @@ namespace VendingMachine.VendingComponents.Processor
     {
         int DepositAmount { get; set; }
         ICommand ReturnCoins();
-        void BuyProduct(Product product);
     }
 }
