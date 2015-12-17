@@ -1,6 +1,8 @@
 using GalaSoft.MvvmLight;
+using VendingMachine.VendingComponents.Coins;
 using VendingMachine.VendingComponents.Processor;
 using VendingMachine.VendingComponents.ProductStore;
+using VendingMachine.VendingComponents.Purse;
 
 namespace VendingMachine.ViewModel
 {
@@ -8,11 +10,33 @@ namespace VendingMachine.ViewModel
     {
         private IProcessor _vendingProcessor;
         private IStore _productStore;
-
+        public IPurse ClientPurse { get; set; }
         public VendingMachineViewModel()
         {
             VendingProcessor = new VendingProcessor();
             ProductStore = new ProductStore();
+            InitializeClientPurse();
+        }
+
+        private void InitializeClientPurse()
+        {
+            ClientPurse = new Purse();
+            for (int i = 0; i < 10; i++)
+            {
+                ClientPurse.AddCoin(new Coin(1));
+            }
+            for (int i = 0; i < 30; i++)
+            {
+                ClientPurse.AddCoin(new Coin(2));
+            }
+            for (int i = 0; i < 20; i++)
+            {
+                ClientPurse.AddCoin(new Coin(5));
+            }
+            for (int i = 0; i < 15; i++)
+            {
+                ClientPurse.AddCoin(new Coin(10));
+            }
         }
 
         public IProcessor VendingProcessor

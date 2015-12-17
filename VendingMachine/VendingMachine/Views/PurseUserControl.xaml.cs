@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using VendingMachine.VendingComponents.Coins;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -21,7 +11,16 @@ namespace VendingMachine.Views
     {
         public PurseUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+        }
+
+        public static readonly DependencyProperty CoinGroupsProperty = DependencyProperty.Register(
+            "CoinGroups", typeof (ObservableCollection<CoinGroup>), typeof (PurseUserControl), new PropertyMetadata(default(ObservableCollection<CoinGroup>)));
+
+        public ObservableCollection<CoinGroup> CoinGroups
+        {
+            get { return (ObservableCollection<CoinGroup>) GetValue(CoinGroupsProperty); }
+            set { SetValue(CoinGroupsProperty, value); }
         }
     }
 }

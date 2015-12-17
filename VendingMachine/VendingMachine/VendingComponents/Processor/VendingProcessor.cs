@@ -1,14 +1,12 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using VendingMachine.Annotations;
 
 namespace VendingMachine.VendingComponents.Processor
 {
     public class VendingProcessor : IProcessor, INotifyPropertyChanged
     {
-        private int _depositAmount = 333;
+        private int _depositAmount;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,11 +19,6 @@ namespace VendingMachine.VendingComponents.Processor
                 _depositAmount = value;
                 OnPropertyChanged();
             }
-        }
-
-        public ICommand ReturnCoins()
-        {
-            throw new NotImplementedException();
         }
 
         [NotifyPropertyChangedInvocator]

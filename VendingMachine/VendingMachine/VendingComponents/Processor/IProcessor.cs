@@ -6,6 +6,5 @@ namespace VendingMachine.VendingComponents.Processor
     public interface IProcessor
     {
         int DepositAmount { get; set; }
-        ICommand ReturnCoins();
     }
 }
