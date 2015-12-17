@@ -51,7 +51,7 @@
             <StackPanel Grid.Column="2">
                 <local:SumUserControl Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
                 <Button>Сдача</Button>
-                <local:PurseUserControl CoinGroups="{Binding ClientPurse.CoinGroups}" />
+                <local:PurseUserControl CoinGroups="{Binding ClientPurse.CoinGroups}" IsButtonsEnabled="True" />
             </StackPanel>
         </Grid>
     </Grid>

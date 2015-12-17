@@ -22,5 +22,14 @@ namespace VendingMachine.Views
             get { return (ObservableCollection<CoinGroup>) GetValue(CoinGroupsProperty); }
             set { SetValue(CoinGroupsProperty, value); }
         }
+
+        public static readonly DependencyProperty IsButtonsEnabledProperty = DependencyProperty.Register(
+            "IsButtonsEnabled", typeof (bool), typeof (PurseUserControl), new PropertyMetadata(default(bool)));
+
+        public bool IsButtonsEnabled
+        {
+            get { return (bool) GetValue(IsButtonsEnabledProperty); }
+            set { SetValue(IsButtonsEnabledProperty, value); }
+        }
     }
 }
