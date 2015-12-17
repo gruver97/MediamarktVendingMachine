@@ -1,18 +1,20 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using VendingMachine.Annotations;
 using VendingMachine.VendingComponents.Coins;
-using VendingMachine.VendingComponents.Purse;
+using VendingMachine.VendingComponents.Purses;
 
 namespace VendingMachine.VendingComponents.Processor
 {
     public class VendingProcessor : IProcessor, INotifyPropertyChanged
     {
+        private IPurse _bufferPurse = new Purse();
         private int _depositAmount;
 
         public VendingProcessor()
         {
-            InitializePurse();
+            InitializeMachinePurse();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,12 +30,17 @@ namespace VendingMachine.VendingComponents.Processor
             }
         }
 
-        public IPurse MachinePurse { get; private set; }
+        public IPurse MachinePurse { get; private set; } = new Purse();
 
-        private void InitializePurse()
+        public void AddToLoader(Coin coin)
+        {
+            _bufferPurse.AddCoin(coin);
+            DepositAmount = _bufferPurse.Total;
+        }
+
+        private void InitializeMachinePurse()
         {
             const int defaultCount = 100;
-            MachinePurse = new Purse.Purse();
             for (var i = 0; i < defaultCount; i++)
             {
                 MachinePurse.AddCoin(new Coin(1));

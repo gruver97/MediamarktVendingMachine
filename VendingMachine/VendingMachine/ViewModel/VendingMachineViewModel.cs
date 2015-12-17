@@ -1,10 +1,12 @@
+﻿using System;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using VendingMachine.VendingComponents.Coins;
 using VendingMachine.VendingComponents.Processor;
 using VendingMachine.VendingComponents.ProductStore;
-using VendingMachine.VendingComponents.Purse;
+using VendingMachine.VendingComponents.Purses;
 
 namespace VendingMachine.ViewModel
 {
@@ -18,12 +20,18 @@ namespace VendingMachine.ViewModel
             VendingProcessor = new VendingProcessor();
             ProductStore = new ProductStore();
             InitializeClientPurse();
-            ClientCoinExtract = new RelayCommand(MoveClientCoin);
+            ClientCoinExtract = new RelayCommand<int>(MoveClientCoin);
         }
 
-        private void MoveClientCoin()
+        private async void MoveClientCoin(int price)
         {
-            
+            var coin = ClientPurse.GetCoin(price);
+            if (coin == null)
+            {
+                await new MessageDialog($"Монеты в {price} руб. закончились").ShowAsync();
+                return;
+            }
+            VendingProcessor.AddToLoader(coin);
         }
 
         public ICommand ClientCoinExtract { get; private set; }

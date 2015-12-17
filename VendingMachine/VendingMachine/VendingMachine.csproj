@@ -118,8 +118,8 @@
     <Compile Include="VendingComponents\ProductStore\IStore.cs" />
     <Compile Include="VendingComponents\ProductStore\Product.cs" />
     <Compile Include="VendingComponents\ProductStore\ProductStore.cs" />
-    <Compile Include="VendingComponents\Purse\IPurse.cs" />
-    <Compile Include="VendingComponents\Purse\Purse.cs" />
+    <Compile Include="VendingComponents\Purses\IPurse.cs" />
+    <Compile Include="VendingComponents\Purses\Purse.cs" />
     <Compile Include="ViewModel\VendingMachineViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\ProductsUserControl.xaml.cs">
