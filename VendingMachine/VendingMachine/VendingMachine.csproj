@@ -117,6 +117,7 @@
     <Compile Include="VendingComponents\Processor\VendingProcessor.cs" />
     <Compile Include="VendingComponents\ProductStore\IStore.cs" />
     <Compile Include="VendingComponents\ProductStore\Product.cs" />
+    <Compile Include="VendingComponents\ProductStore\ProductStore.cs" />
     <Compile Include="VendingComponents\Purse\IPurse.cs" />
     <Compile Include="ViewModel\VendingMachineViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -142,6 +143,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\Products\Coffee.jpg" />
+    <Content Include="Assets\Products\Juice.jpg" />
+    <Content Include="Assets\Products\MilkCoffee.jpg" />
+    <Content Include="Assets\Products\Tea.jpg" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />

@@ -43,11 +43,11 @@
         <Grid Grid.Row="1" Margin="40,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <local:PurseUserControl Grid.Column="0" />
-            <local:ProductsUserControl Grid.Column="1" />
+            <local:ProductsUserControl Grid.Column="1" ProductsSource="{Binding Path=ProductStore.Products}" />
             <StackPanel Grid.Column="2">
                 <local:SumUserControl Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
                 <Button>Сдача</Button>
