@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using VendingMachine.Common;
 using VendingMachine.VendingComponents.Coins;
 using VendingMachine.VendingComponents.Processor;
 using VendingMachine.VendingComponents.ProductStore;
@@ -21,6 +22,12 @@ namespace VendingMachine.ViewModel
             ProductStore = new ProductStore();
             InitializeClientPurse();
             ClientCoinExtract = new RelayCommand<int>(MoveClientCoin);
+            BuyProduct = new RelayCommand<ProductGroup>(OnBuyProduct);
+        }
+
+        private void OnBuyProduct(ProductGroup productGroup)
+        {
+            
         }
 
         private async void MoveClientCoin(int price)
@@ -35,7 +42,7 @@ namespace VendingMachine.ViewModel
         }
 
         public ICommand ClientCoinExtract { get; private set; }
-
+        public ICommand BuyProduct { get; private set; }
         private void InitializeClientPurse()
         {
             ClientPurse = new Purse();
