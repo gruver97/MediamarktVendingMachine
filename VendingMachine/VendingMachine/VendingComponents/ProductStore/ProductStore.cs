@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using VendingMachine.Annotations;
 
 namespace VendingMachine.VendingComponents.ProductStore
 {
-    public class ProductStore : IStore
+    public class ProductStore : IStore, INotifyPropertyChanged
     {
         public ProductStore()
         {
@@ -15,9 +18,9 @@ namespace VendingMachine.VendingComponents.ProductStore
 
         public ObservableCollection<ProductGroup> ProductsGroup { get; set; }
 
-        public ICommand BuyProduct(Product product)
+        public void BuyProduct(ProductGroup productGroup)
         {
-            throw new NotImplementedException();
+            productGroup.ExtractProduct();
         }
 
         private void FillProducts()
@@ -62,6 +65,14 @@ namespace VendingMachine.VendingComponents.ProductStore
             {
                 ProductsGroup.Add(productGroup);
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

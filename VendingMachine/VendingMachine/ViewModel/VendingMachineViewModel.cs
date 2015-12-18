@@ -25,9 +25,18 @@ namespace VendingMachine.ViewModel
             BuyProduct = new RelayCommand<ProductGroup>(OnBuyProduct);
         }
 
-        private void OnBuyProduct(ProductGroup productGroup)
+        private async void OnBuyProduct(ProductGroup productGroup)
         {
-            
+            if (productGroup.Count == 0)
+            {
+                await new MessageDialog($"{productGroup.Name} законился.").ShowAsync();
+                return;
+            }
+            if (productGroup.Price <= VendingProcessor.DepositAmount)
+            {
+                ProductStore.BuyProduct(productGroup);
+                bool hasRenting = VendingProcessor.CommitPurchase(productGroup.Price);
+            }
         }
 
         private async void MoveClientCoin(int price)

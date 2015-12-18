@@ -38,6 +38,12 @@ namespace VendingMachine.VendingComponents.Processor
             DepositAmount = _bufferPurse.Total;
         }
 
+        public bool CommitPurchase(int price)
+        {
+            DepositAmount -= price;
+            return DepositAmount > 0;
+        }
+
         private void InitializeMachinePurse()
         {
             const int defaultCount = 100;

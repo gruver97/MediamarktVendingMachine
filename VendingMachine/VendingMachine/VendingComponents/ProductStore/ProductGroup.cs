@@ -22,6 +22,12 @@ namespace VendingMachine.VendingComponents.ProductStore
             FillGroup();
         }
 
+        public void ExtractProduct()
+        {
+            Products.Pop();
+            Count = Products.Count;
+        }
+
         public Stack<Product> Products { get; }
 
         public string Name
