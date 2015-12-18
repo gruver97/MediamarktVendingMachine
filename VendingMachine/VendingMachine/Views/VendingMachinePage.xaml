@@ -54,7 +54,7 @@
                                        ProductsSource="{Binding Path=ProductStore.ProductsGroup}" />
             <StackPanel Grid.Column="2">
                 <local:SumUserControl Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
-                <Button>Сдача</Button>
+                <Button Command="{Binding Path=CalculateRentingCommand}">Сдача</Button>
                 <local:PurseUserControl CoinGroups="{Binding Path=ClientPurse.CoinGroups}"
                                         IsButtonsEnabled="True"
                                         Maximum="{Binding Path=ClientPurse.MaximumAmount}"

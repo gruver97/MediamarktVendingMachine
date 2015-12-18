@@ -120,7 +120,6 @@
     <Compile Include="VendingComponents\ProductStore\ProductStore.cs" />
     <Compile Include="VendingComponents\Purses\IPurse.cs" />
     <Compile Include="VendingComponents\Purses\Purse.cs" />
-    <Compile Include="VendingComponents\Rent\RentCalculator.cs" />
     <Compile Include="ViewModel\VendingMachineViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\ProductsUserControl.xaml.cs">

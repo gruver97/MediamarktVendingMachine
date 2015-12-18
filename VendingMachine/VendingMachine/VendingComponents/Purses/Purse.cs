@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using VendingMachine.Annotations;
 using VendingMachine.VendingComponents.Coins;
@@ -12,6 +13,7 @@ namespace VendingMachine.VendingComponents.Purses
         private readonly int[] _coinPrices = {1, 2, 5, 10};
         private int _total;
         private int _maximumAmount;
+        private int _total1;
 
         public Purse(int maximunAmount)
         {
@@ -34,26 +36,31 @@ namespace VendingMachine.VendingComponents.Purses
         {
             var groupIndex = GetCoinGroupIndex(coin.Price);
             CoinGroups[groupIndex].AddCoin(coin);
-            Total += coin.Price;
+            Total = UpdateTotal();
         }
 
         public Coin GetCoin(int price)
         {
             var groupIndex = GetCoinGroupIndex(price);
             var coin = CoinGroups[groupIndex].GetCoin();
-            Total = Total - coin?.Price ?? Total;
+            Total = UpdateTotal();
             return coin;
         }
 
         public int Total
         {
             get { return _total; }
-            private set
+            set
             {
                 if (value == _total) return;
                 _total = value;
                 OnPropertyChanged();
             }
+        }
+
+        private int UpdateTotal()
+        {
+            return CoinGroups.Sum(coinGroup => coinGroup.TotalGroup);
         }
 
         public int MaximumAmount

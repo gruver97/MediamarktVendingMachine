@@ -1,4 +1,5 @@
-﻿using VendingMachine.VendingComponents.Coins;
+﻿using System.Collections.Generic;
+using VendingMachine.VendingComponents.Coins;
 using VendingMachine.VendingComponents.Purses;
 
 namespace VendingMachine.VendingComponents.Processor
@@ -11,5 +12,6 @@ namespace VendingMachine.VendingComponents.Processor
 
         void AddToLoader(Coin coin);
         void CommitPurchase(int price);
+        IEnumerable<Coin> ReturnRenting();
     }
 }

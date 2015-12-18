@@ -22,6 +22,16 @@ namespace VendingMachine.ViewModel
             InitializeClientPurse();
             ClientCoinExtract = new RelayCommand<int>(MoveClientCoin);
             BuyProduct = new RelayCommand<ProductGroup>(OnBuyProduct);
+            CalculateRentingCommand = new RelayCommand(OnCalculateRentingCommand);
+        }
+
+        private void OnCalculateRentingCommand()
+        {
+            var coins = VendingProcessor.ReturnRenting();
+            foreach (var coin in coins)
+            {
+                ClientPurse.AddCoin(coin);
+            }
         }
 
         public IPurse ClientPurse { get; set; }
@@ -67,6 +77,8 @@ namespace VendingMachine.ViewModel
                 await new MessageDialog("Недостаточно средств.").ShowAsync();
             }
         }
+
+        public ICommand CalculateRentingCommand { get; private set; }
 
         private async void MoveClientCoin(int price)
         {
