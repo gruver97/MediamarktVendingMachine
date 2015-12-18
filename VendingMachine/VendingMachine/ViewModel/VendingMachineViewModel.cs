@@ -3,7 +3,6 @@ using System.Windows.Input;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using VendingMachine.Common;
 using VendingMachine.VendingComponents.Coins;
 using VendingMachine.VendingComponents.Processor;
 using VendingMachine.VendingComponents.ProductStore;
@@ -13,9 +12,9 @@ namespace VendingMachine.ViewModel
 {
     public class VendingMachineViewModel : ViewModelBase
     {
-        private IProcessor _vendingProcessor;
         private IStore _productStore;
-        public IPurse ClientPurse { get; set; }
+        private IProcessor _vendingProcessor;
+
         public VendingMachineViewModel()
         {
             VendingProcessor = new VendingProcessor();
@@ -25,54 +24,10 @@ namespace VendingMachine.ViewModel
             BuyProduct = new RelayCommand<ProductGroup>(OnBuyProduct);
         }
 
-        private async void OnBuyProduct(ProductGroup productGroup)
-        {
-            if (productGroup.Count == 0)
-            {
-                await new MessageDialog($"{productGroup.Name} законился.").ShowAsync();
-                return;
-            }
-            if (productGroup.Price <= VendingProcessor.DepositAmount)
-            {
-                ProductStore.BuyProduct(productGroup);
-                bool hasRenting = VendingProcessor.CommitPurchase(productGroup.Price);
-            }
-        }
-
-        private async void MoveClientCoin(int price)
-        {
-            var coin = ClientPurse.GetCoin(price);
-            if (coin == null)
-            {
-                await new MessageDialog($"Монеты в {price} руб. закончились").ShowAsync();
-                return;
-            }
-            VendingProcessor.AddToLoader(coin);
-        }
+        public IPurse ClientPurse { get; set; }
 
         public ICommand ClientCoinExtract { get; private set; }
         public ICommand BuyProduct { get; private set; }
-        private void InitializeClientPurse()
-        {
-            const int maximumAmount = 100;
-            ClientPurse = new Purse(maximumAmount);
-            for (int i = 0; i < 10; i++)
-            {
-                ClientPurse.AddCoin(new Coin(1));
-            }
-            for (int i = 0; i < 30; i++)
-            {
-                ClientPurse.AddCoin(new Coin(2));
-            }
-            for (int i = 0; i < 20; i++)
-            {
-                ClientPurse.AddCoin(new Coin(5));
-            }
-            for (int i = 0; i < 15; i++)
-            {
-                ClientPurse.AddCoin(new Coin(10));
-            }
-        }
 
         public IProcessor VendingProcessor
         {
@@ -91,6 +46,65 @@ namespace VendingMachine.ViewModel
             {
                 _productStore = value;
                 RaisePropertyChanged(nameof(ProductStore));
+            }
+        }
+
+        private async void OnBuyProduct(ProductGroup productGroup)
+        {
+            if (productGroup.Count == 0)
+            {
+                await new MessageDialog($"{productGroup.Name} законился.").ShowAsync();
+                return;
+            }
+            if (productGroup.Price <= VendingProcessor.DepositAmount)
+            {
+                ProductStore.BuyProduct(productGroup);
+                var hasRenting = VendingProcessor.CommitPurchase(productGroup.Price);
+                if (hasRenting)
+                {
+                    //TODO: копируем в машину монетки
+                }
+                else
+                {
+                    await new MessageDialog("Спасибо!").ShowAsync();
+                }
+            }
+            else
+            {
+                await new MessageDialog("Недостаточно средств.").ShowAsync();
+            }
+        }
+
+        private async void MoveClientCoin(int price)
+        {
+            var coin = ClientPurse.GetCoin(price);
+            if (coin == null)
+            {
+                await new MessageDialog($"Монеты в {price} руб. закончились").ShowAsync();
+                return;
+            }
+            VendingProcessor.AddToLoader(coin);
+        }
+
+        private void InitializeClientPurse()
+        {
+            const int maximumAmount = 100;
+            ClientPurse = new Purse(maximumAmount);
+            for (var i = 0; i < 10; i++)
+            {
+                ClientPurse.AddCoin(new Coin(1));
+            }
+            for (var i = 0; i < 30; i++)
+            {
+                ClientPurse.AddCoin(new Coin(2));
+            }
+            for (var i = 0; i < 20; i++)
+            {
+                ClientPurse.AddCoin(new Coin(5));
+            }
+            for (var i = 0; i < 15; i++)
+            {
+                ClientPurse.AddCoin(new Coin(10));
             }
         }
     }
