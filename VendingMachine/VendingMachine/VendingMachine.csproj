@@ -117,6 +117,7 @@
     <Compile Include="VendingComponents\Processor\VendingProcessor.cs" />
     <Compile Include="VendingComponents\ProductStore\IStore.cs" />
     <Compile Include="VendingComponents\ProductStore\Product.cs" />
+    <Compile Include="VendingComponents\ProductStore\ProductGroup.cs" />
     <Compile Include="VendingComponents\ProductStore\ProductStore.cs" />
     <Compile Include="VendingComponents\Purses\IPurse.cs" />
     <Compile Include="VendingComponents\Purses\Purse.cs" />

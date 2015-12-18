@@ -5,7 +5,7 @@ namespace VendingMachine.VendingComponents.ProductStore
 {
     public interface IStore
     {
-        ObservableCollection<Product> Products { get; set; }
+        ObservableCollection<ProductGroup> ProductsGroup { get; set; }
         ICommand BuyProduct(Product product);
     }
 }

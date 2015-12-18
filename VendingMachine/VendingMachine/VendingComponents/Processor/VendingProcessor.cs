@@ -9,7 +9,7 @@ namespace VendingMachine.VendingComponents.Processor
 {
     public class VendingProcessor : IProcessor, INotifyPropertyChanged
     {
-        private IPurse _bufferPurse = new Purse();
+        private readonly IPurse _bufferPurse = new Purse();
         private int _depositAmount;
 
         public VendingProcessor()

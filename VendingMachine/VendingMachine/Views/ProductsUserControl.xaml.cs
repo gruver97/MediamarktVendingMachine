@@ -15,11 +15,11 @@ namespace VendingMachine.Views
         }
 
         public static readonly DependencyProperty ProductsSourceProperty = DependencyProperty.Register(
-            "ProductsSource", typeof (ObservableCollection<Product>), typeof (ProductsUserControl), new PropertyMetadata(default(ObservableCollection<Product>)));
+            "ProductsSource", typeof (ObservableCollection<ProductGroup>), typeof (ProductsUserControl), new PropertyMetadata(default(ObservableCollection<ProductGroup>)));
 
-        public ObservableCollection<Product> ProductsSource
+        public ObservableCollection<ProductGroup> ProductsSource
         {
-            get { return (ObservableCollection<Product>) GetValue(ProductsSourceProperty); }
+            get { return (ObservableCollection<ProductGroup>) GetValue(ProductsSourceProperty); }
             set { SetValue(ProductsSourceProperty, value); }
         }
     }

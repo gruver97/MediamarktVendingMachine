@@ -1,38 +1,33 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using VendingMachine.Annotations;
 
 namespace VendingMachine.VendingComponents.ProductStore
 {
-    public class Product:INotifyPropertyChanged
+    public class Product : INotifyPropertyChanged
     {
-        private int _count;
+        private string _imageSourceUri;
 
-        public Product(string name, int price, int count, string imageSource)
+        public Product(string name, int price, string imageSource)
         {
             Name = name;
             Price = price;
-            Count = count;
             ImageSourceUri = imageSource;
         }
 
-        public string ImageSourceUri { get; set; }
-
-        public string Name { get; set; }
-        public int Price { get; set; }
-
-        public int Count
+        public string ImageSourceUri
         {
-            get { return _count; }
-            set
+            get { return _imageSourceUri; }
+            private set
             {
-                if (value == _count) return;
-                _count = value;
+                if (value == _imageSourceUri) return;
+                _imageSourceUri = value;
                 OnPropertyChanged();
             }
         }
 
+        public string Name { get; private set; }
+        public int Price { get; private set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

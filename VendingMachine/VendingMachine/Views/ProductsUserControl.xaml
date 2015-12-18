@@ -18,7 +18,7 @@
                         <RowDefinition Height="100" />
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0"
-                           Source="{Binding Path=ImageSourceUri}"
+                           Source="{Binding Path=ImageGroup}"
                            Stretch="UniformToFill" />
                     <Border Grid.Row="1" Background="{ThemeResource ListViewItemOverlayBackgroundThemeBrush}">
                         <StackPanel Orientation="Vertical">
