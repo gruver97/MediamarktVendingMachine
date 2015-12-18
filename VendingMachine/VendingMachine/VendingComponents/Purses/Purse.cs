@@ -11,9 +11,11 @@ namespace VendingMachine.VendingComponents.Purses
     {
         private readonly int[] _coinPrices = {1, 2, 5, 10};
         private int _total;
+        private int _maximumAmount;
 
-        public Purse()
+        public Purse(int maximunAmount)
         {
+            MaximumAmount = maximunAmount;
             CoinGroups = new ObservableCollection<CoinGroup>();
             for (var i = 0; i < 4; i++)
             {
@@ -30,7 +32,7 @@ namespace VendingMachine.VendingComponents.Purses
         public void AddCoin(Coin coin)
         {
             var groupIndex = GetCoinGroupIndex(coin.Price);
-            CoinGroups[groupIndex].Coins.Push(coin);
+            CoinGroups[groupIndex].AddCoin(coin);
             Total += coin.Price;
         }
 
@@ -49,6 +51,17 @@ namespace VendingMachine.VendingComponents.Purses
             {
                 if (value == _total) return;
                 _total = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int MaximumAmount
+        {
+            get { return _maximumAmount; }
+            private set
+            {
+                if (value == _maximumAmount) return;
+                _maximumAmount = value;
                 OnPropertyChanged();
             }
         }

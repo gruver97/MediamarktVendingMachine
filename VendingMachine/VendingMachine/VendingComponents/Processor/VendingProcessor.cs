@@ -9,7 +9,8 @@ namespace VendingMachine.VendingComponents.Processor
 {
     public class VendingProcessor : IProcessor, INotifyPropertyChanged
     {
-        private readonly IPurse _bufferPurse = new Purse();
+        const int MaximumAmount = 1000;
+        private readonly IPurse _bufferPurse = new Purse(MaximumAmount);
         private int _depositAmount;
 
         public VendingProcessor()
@@ -30,7 +31,7 @@ namespace VendingMachine.VendingComponents.Processor
             }
         }
 
-        public IPurse MachinePurse { get; private set; } = new Purse();
+        public IPurse MachinePurse { get; private set; } = new Purse(MaximumAmount);
 
         public void AddToLoader(Coin coin)
         {
@@ -41,13 +42,21 @@ namespace VendingMachine.VendingComponents.Processor
         public bool CommitPurchase(int price)
         {
             DepositAmount -= price;
+            foreach (var coinGroup in _bufferPurse.CoinGroups)
+            {
+                var stackCopy = coinGroup.GetAllCoins();
+                foreach (var coin in stackCopy)
+                {
+                    MachinePurse.AddCoin(coin);
+                }
+            }
             return DepositAmount > 0;
         }
 
         private void InitializeMachinePurse()
         {
-            const int defaultCount = 100;
-            for (var i = 0; i < defaultCount; i++)
+            const int defaultAmount = 100;
+            for (var i = 0; i < defaultAmount; i++)
             {
                 MachinePurse.AddCoin(new Coin(1));
                 MachinePurse.AddCoin(new Coin(2));

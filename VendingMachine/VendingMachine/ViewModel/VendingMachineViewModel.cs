@@ -54,7 +54,8 @@ namespace VendingMachine.ViewModel
         public ICommand BuyProduct { get; private set; }
         private void InitializeClientPurse()
         {
-            ClientPurse = new Purse();
+            const int maximumAmount = 100;
+            ClientPurse = new Purse(maximumAmount);
             for (int i = 0; i < 10; i++)
             {
                 ClientPurse.AddCoin(new Coin(1));

@@ -9,5 +9,6 @@ namespace VendingMachine.VendingComponents.Purses
         void AddCoin(Coin coin);
         Coin GetCoin(int price);
         int Total { get; }
+        int MaximumAmount { get; }
     }
 }

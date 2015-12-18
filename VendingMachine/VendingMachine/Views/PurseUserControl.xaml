@@ -48,7 +48,8 @@
                     </TextBlock>
                     <ProgressBar Grid.Row="1"
                                  Grid.Column="1"
-                                 Maximum="100"
+                                 Maximum="{Binding ElementName=PurseControl,
+                                                   Path=Maximum}"
                                  Minimum="0"
                                  Value="{Binding Path=Coins.Count}" />
                 </Grid>

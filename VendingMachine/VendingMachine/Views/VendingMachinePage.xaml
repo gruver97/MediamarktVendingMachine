@@ -46,15 +46,18 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <local:PurseUserControl Grid.Column="0" CoinGroups="{Binding Path=VendingProcessor.MachinePurse.CoinGroups}" />
+            <local:PurseUserControl Grid.Column="0"
+                                    CoinGroups="{Binding Path=VendingProcessor.MachinePurse.CoinGroups}"
+                                    Maximum="{Binding Path=VendingProcessor.MachinePurse.MaximumAmount}" />
             <local:ProductsUserControl Grid.Column="1"
                                        BuyProductCommand="{Binding Path=BuyProduct}"
                                        ProductsSource="{Binding Path=ProductStore.ProductsGroup}" />
             <StackPanel Grid.Column="2">
                 <local:SumUserControl Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
                 <Button>Сдача</Button>
-                <local:PurseUserControl CoinGroups="{Binding ClientPurse.CoinGroups}"
+                <local:PurseUserControl CoinGroups="{Binding Path=ClientPurse.CoinGroups}"
                                         IsButtonsEnabled="True"
+                                        Maximum="{Binding Path=ClientPurse.MaximumAmount}"
                                         PressCoinCommand="{Binding Path=ClientCoinExtract}" />
             </StackPanel>
         </Grid>

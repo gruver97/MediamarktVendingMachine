@@ -41,5 +41,14 @@ namespace VendingMachine.Views
             get { return (ICommand) GetValue(PressCoinCommandProperty); }
             set { SetValue(PressCoinCommandProperty, value); }
         }
+
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
+            "Maximum", typeof (int), typeof (PurseUserControl), new PropertyMetadata(default(int)));
+
+        public int Maximum
+        {
+            get { return (int) GetValue(MaximumProperty); }
+            set { SetValue(MaximumProperty, value); }
+        }
     }
 }
