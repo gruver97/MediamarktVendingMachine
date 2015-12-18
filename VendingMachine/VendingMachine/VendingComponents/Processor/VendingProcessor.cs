@@ -1,5 +1,5 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using VendingMachine.Annotations;
 using VendingMachine.VendingComponents.Coins;
@@ -9,7 +9,7 @@ namespace VendingMachine.VendingComponents.Processor
 {
     public class VendingProcessor : IProcessor, INotifyPropertyChanged
     {
-        const int MaximumAmount = 1000;
+        private const int MaximumAmount = 1000;
         private readonly IPurse _bufferPurse = new Purse(MaximumAmount);
         private int _depositAmount;
 
@@ -31,7 +31,7 @@ namespace VendingMachine.VendingComponents.Processor
             }
         }
 
-        public IPurse MachinePurse { get; private set; } = new Purse(MaximumAmount);
+        public IPurse MachinePurse { get; } = new Purse(MaximumAmount);
 
         public void AddToLoader(Coin coin)
         {
@@ -39,18 +39,40 @@ namespace VendingMachine.VendingComponents.Processor
             DepositAmount = _bufferPurse.Total;
         }
 
-        public bool CommitPurchase(int price)
+        public void CommitPurchase(int price)
         {
             DepositAmount -= price;
-            foreach (var coinGroup in _bufferPurse.CoinGroups)
+            MoveCoins(_bufferPurse, MachinePurse);
+            if (DepositAmount > 0) MoveCoins(MachinePurse, _bufferPurse, DepositAmount);
+        }
+
+        private void MoveCoins(IPurse source, IPurse target, int amount)
+        {
+            foreach (var coinGroup in source.CoinGroups.OrderByDescending(sourceCoinGroup => sourceCoinGroup.Price))
             {
-                var stackCopy = coinGroup.GetAllCoins();
-                foreach (var coin in stackCopy)
+                int solidPart = amount/ coinGroup.Price;
+                if (solidPart == 0) continue;
+                for (int i = solidPart; i >0; i--)
                 {
-                    MachinePurse.AddCoin(coin);
+                    if (!coinGroup.Coins.Any()) break;
+                    var coin = coinGroup.GetCoin();
+                    target.AddCoin(coin);
+                    amount -= coin.Price;
                 }
             }
-            return DepositAmount > 0;
+        }
+
+        private void MoveCoins(IPurse source, IPurse target)
+        {
+            //Перенос всей суммы
+            foreach (var coinGroup in source.CoinGroups)
+            {
+                while (coinGroup.Coins.Any())
+                {
+                    var coin = source.GetCoin(coinGroup.Price);
+                    target.AddCoin(coin);
+                }
+            }
         }
 
         private void InitializeMachinePurse()

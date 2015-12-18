@@ -10,6 +10,6 @@ namespace VendingMachine.VendingComponents.Processor
         IPurse MachinePurse { get; }
 
         void AddToLoader(Coin coin);
-        bool CommitPurchase(int price);
+        void CommitPurchase(int price);
     }
 }

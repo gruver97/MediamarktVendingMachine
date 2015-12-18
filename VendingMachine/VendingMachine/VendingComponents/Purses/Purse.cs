@@ -15,6 +15,7 @@ namespace VendingMachine.VendingComponents.Purses
 
         public Purse(int maximunAmount)
         {
+            _total = 0;
             MaximumAmount = maximunAmount;
             CoinGroups = new ObservableCollection<CoinGroup>();
             for (var i = 0; i < 4; i++)

@@ -59,15 +59,8 @@ namespace VendingMachine.ViewModel
             if (productGroup.Price <= VendingProcessor.DepositAmount)
             {
                 ProductStore.BuyProduct(productGroup);
-                var hasRenting = VendingProcessor.CommitPurchase(productGroup.Price);
-                if (hasRenting)
-                {
-                    //TODO: копируем в машину монетки
-                }
-                else
-                {
-                    await new MessageDialog("Спасибо!").ShowAsync();
-                }
+                VendingProcessor.CommitPurchase(productGroup.Price);
+                await new MessageDialog("Спасибо!").ShowAsync();
             }
             else
             {
