@@ -4,6 +4,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:VendingMachine.Views"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:VendingMachine.Controls"
       x:Name="pageRoot"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=VendingMachineViewModel}"
@@ -58,10 +59,11 @@
             <StackPanel Grid.Column="2">
                 <local:SumUserControl Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
                 <Button Command="{Binding Path=CalculateRentingCommand}">Сдача</Button>
-                <local:PurseUserControl CoinGroups="{Binding Path=ClientPurse.CoinGroups}"
+                <!--<local:PurseUserControl CoinGroups="{Binding Path=ClientPurse.CoinGroups}"
                                         IsButtonsEnabled="True"
                                         Maximum="{Binding Path=ClientPurse.MaximumAmount}"
-                                        PressCoinCommand="{Binding Path=ClientCoinExtract}" />
+                                        PressCoinCommand="{Binding Path=ClientCoinExtract}" />-->
+                <controls:TemplatedPurse Style="{StaticResource ClientPurseStyle}" CoinGroups="{Binding Path=ClientPurse.CoinGroups}"></controls:TemplatedPurse>
             </StackPanel>
         </Grid>
     </Grid>
