@@ -1,7 +1,6 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:VendingMachine"
     xmlns:controls="using:VendingMachine.Controls">
 
     <Style TargetType="controls:TemplatedPurse">
@@ -29,16 +28,16 @@
                                 Background="Transparent" />
                         <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{TemplateBinding Foreground}">
                             <TextBlock.Inlines>
-                                <Run Text="Остаток " />
+                                <Run Text="Rest of " />
                                 <Run Text="{Binding Path=Coins.Count}" />
-                                <Run Text=" монет" />
+                                <Run Text=" coins" />
                             </TextBlock.Inlines>
                         </TextBlock>
                         <ProgressBar Grid.Row="1"
                                      Grid.Column="1"
-                                     Maximum="{TemplateBinding Maximum}"
-                                     Minimum="0"
+                                     Maximum="50"
                                      Value="{Binding Path=Coins.Count}"
+                                     Minimum="0"
                                      Foreground="{TemplateBinding Foreground}"
                                      Background="{TemplateBinding Background}" />
                     </Grid>

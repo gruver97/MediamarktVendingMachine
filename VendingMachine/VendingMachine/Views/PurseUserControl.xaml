@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:VendingMachine.Controls"
              x:Name="PurseControl"
              d:DesignHeight="300"
              d:DesignWidth="400"
              mc:Ignorable="d">
-
     <ListView CanDragItems="False"
               CanReorderItems="False"
               ItemsSource="{Binding ElementName=PurseControl,
@@ -20,39 +20,10 @@
         </ListView.ItemContainerStyle>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <Grid Height="100">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0"
-                            Grid.RowSpan="2"
-                            Grid.Column="0"
-                            Margin="0,0,10,0"
-                            Command="{Binding ElementName=PurseControl,
-                                              Path=PressCoinCommand}"
-                            CommandParameter="{Binding Price}"
-                            Content="{Binding Path=Price}"
-                            IsEnabled="{Binding ElementName=PurseControl,
-                                                Path=IsButtonsEnabled}" />
-                    <TextBlock Grid.Row="0" Grid.Column="1">
-                        <TextBlock.Inlines>
-                            <Run Text="Остаток " />
-                            <Run Text="{Binding Path=Coins.Count}" />
-                            <Run Text=" монет" />
-                        </TextBlock.Inlines>
-                    </TextBlock>
-                    <ProgressBar Grid.Row="1"
-                                 Grid.Column="1"
-                                 Maximum="{Binding ElementName=PurseControl,
-                                                   Path=Maximum}"
-                                 Minimum="0"
-                                 Value="{Binding Path=Coins.Count}" />
-                </Grid>
+                <controls:TemplatedPurse Style="{StaticResource ClientPurseStyle}"
+                                         PressCoinCommand="{Binding ElementName=PurseControl, Path=PressCoinCommand}"
+                                         Count="{Binding Path=Coins.Count}"
+                                         IsButtonsEnabled="{Binding ElementName=PurseControl, Path=IsButtonsEnabled}" />
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

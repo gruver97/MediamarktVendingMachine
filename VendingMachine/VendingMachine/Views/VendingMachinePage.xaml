@@ -60,15 +60,11 @@
             <StackPanel Grid.Column="2">
                 <local:SumUserControl Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
                 <Button Command="{Binding Path=CalculateRentingCommand}">Сдача</Button>
-                <!--<local:PurseUserControl CoinGroups="{Binding Path=ClientPurse.CoinGroups}"
+                <local:PurseUserControl CoinGroups="{Binding Path=ClientPurse.CoinGroups}"
                                         IsButtonsEnabled="True"
                                         Maximum="{Binding Path=ClientPurse.MaximumAmount}"
-                                        PressCoinCommand="{Binding Path=ClientCoinExtract}" />-->
-                <controls:TemplatedPurse Style="{StaticResource ClientPurseStyle}"
-                                         CoinGroups="{Binding Path=ClientPurse.CoinGroups}"
-                                         IsButtonsEnabled="True"
-                                        Maximum="{Binding Path=ClientPurse.MaximumAmount}"
-                                        PressCoinCommand="{Binding Path=ClientCoinExtract}"/>
+                                        PressCoinCommand="{Binding Path=ClientCoinExtract}"
+                                        />
             </StackPanel>
         </Grid>
     </Grid>
