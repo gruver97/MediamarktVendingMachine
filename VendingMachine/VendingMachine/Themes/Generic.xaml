@@ -37,7 +37,7 @@
                                      Grid.Column="1"
                                      Maximum="50"
                                      Value="{Binding Path=Coins.Count}"
-                                     Minimum="0"
+                                     Minimum="{TemplateBinding Maximum}"
                                      Foreground="{TemplateBinding Foreground}"
                                      Background="{TemplateBinding Background}" />
                     </Grid>

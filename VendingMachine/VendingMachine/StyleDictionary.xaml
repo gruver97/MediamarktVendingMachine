@@ -5,6 +5,11 @@
     <Style x:Key="ClientPurseStyle" TargetType="controls:TemplatedPurse">
         <Setter Property="Background" Value="#939FAB" />
         <Setter Property="Foreground" Value="#C9CFD5" />
-        <Setter Property="Count" Value="600"></Setter>
+        <Setter Property="IsButtonsEnabled" Value="True"></Setter>
+    </Style>
+
+    <Style x:Key="MachinePurseStyle" TargetType="controls:TemplatedPurse">
+        <Setter Property="Foreground" Value="#5B6B7A" />
+        <Setter Property="IsButtonsEnabled" Value="False"></Setter>
     </Style>
 </ResourceDictionary>

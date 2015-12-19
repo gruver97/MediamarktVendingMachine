@@ -20,10 +20,10 @@
         </ListView.ItemContainerStyle>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <controls:TemplatedPurse Style="{StaticResource ClientPurseStyle}"
+                <controls:TemplatedPurse Style="{Binding ElementName=PurseControl, Path=PurseStyle}"
                                          PressCoinCommand="{Binding ElementName=PurseControl, Path=PressCoinCommand}"
                                          Count="{Binding Path=Coins.Count}"
-                                         IsButtonsEnabled="{Binding ElementName=PurseControl, Path=IsButtonsEnabled}" />
+                                         />
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

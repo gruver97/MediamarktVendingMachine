@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using VendingMachine.VendingComponents.Coins;
 
 // The Templated Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -15,9 +14,22 @@ namespace VendingMachine.Controls
         public static readonly DependencyProperty IsButtonsEnabledProperty = DependencyProperty.Register(
             "IsButtonsEnabled", typeof (bool), typeof (TemplatedPurse), new PropertyMetadata(default(bool)));
 
+
+        public static readonly DependencyProperty MaximumProperty = DependencyProperty.Register(
+            "Maximum", typeof (int), typeof (TemplatedPurse), new PropertyMetadata(default(int)));
+
+        public static readonly DependencyProperty CountProperty = DependencyProperty.Register(
+            "Count", typeof (int), typeof (TemplatedPurse), new PropertyMetadata(default(int)));
+
         public TemplatedPurse()
         {
             DefaultStyleKey = typeof (TemplatedPurse);
+        }
+
+        public int Maximum
+        {
+            get { return (int) GetValue(MaximumProperty); }
+            set { SetValue(MaximumProperty, value); }
         }
 
         public ICommand PressCoinCommand
@@ -31,9 +43,6 @@ namespace VendingMachine.Controls
             get { return (bool) GetValue(IsButtonsEnabledProperty); }
             set { SetValue(IsButtonsEnabledProperty, value); }
         }
-
-        public static readonly DependencyProperty CountProperty = DependencyProperty.Register(
-            "Count", typeof (int), typeof (TemplatedPurse), new PropertyMetadata(default(int)));
 
         public int Count
         {

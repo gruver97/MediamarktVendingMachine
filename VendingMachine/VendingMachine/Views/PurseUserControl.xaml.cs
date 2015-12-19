@@ -15,6 +15,15 @@ namespace VendingMachine.Views
             InitializeComponent();
         }
 
+        public static readonly DependencyProperty PurseStyleProperty = DependencyProperty.Register(
+            "PurseStyle", typeof (Style), typeof (PurseUserControl), new PropertyMetadata(default(Style)));
+
+        public Style PurseStyle
+        {
+            get { return (Style) GetValue(PurseStyleProperty); }
+            set { SetValue(PurseStyleProperty, value); }
+        }
+
         public static readonly DependencyProperty CoinGroupsProperty = DependencyProperty.Register(
             "CoinGroups", typeof (ObservableCollection<CoinGroup>), typeof (PurseUserControl), new PropertyMetadata(default(ObservableCollection<CoinGroup>)));
 
@@ -22,15 +31,6 @@ namespace VendingMachine.Views
         {
             get { return (ObservableCollection<CoinGroup>) GetValue(CoinGroupsProperty); }
             set { SetValue(CoinGroupsProperty, value); }
-        }
-
-        public static readonly DependencyProperty IsButtonsEnabledProperty = DependencyProperty.Register(
-            "IsButtonsEnabled", typeof (bool), typeof (PurseUserControl), new PropertyMetadata(default(bool)));
-
-        public bool IsButtonsEnabled
-        {
-            get { return (bool) GetValue(IsButtonsEnabledProperty); }
-            set { SetValue(IsButtonsEnabledProperty, value); }
         }
 
         public static readonly DependencyProperty PressCoinCommandProperty = DependencyProperty.Register(
