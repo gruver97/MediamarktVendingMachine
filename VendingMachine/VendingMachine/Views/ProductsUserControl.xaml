@@ -11,7 +11,7 @@
     <GridView IsItemClickEnabled="True"
               ItemsSource="{Binding ElementName=ProductsControl,
                                     Path=ProductsSource}"
-              SelectionMode="None">
+              SelectionMode="None" Margin="0">
         <GridView.ItemTemplate>
             <DataTemplate>
                 <Grid Width="300"
