@@ -8,13 +8,40 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:TemplatedPurse">
-                    <ListView ItemsSource="{TemplateBinding CoinGroups}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Path=TotalGroup}" Foreground="{TemplateBinding Foreground}"></TextBlock>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                    <Grid Height="100">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="Progress" Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                Margin="0,0,10,0"
+                                Command="{TemplateBinding PressCoinCommand}"
+                                CommandParameter="{Binding Path=Price}"
+                                Content="{Binding Path=Price}"
+                                IsEnabled="{TemplateBinding IsButtonsEnabled}"
+                                Foreground="{TemplateBinding Foreground}"
+                                Background="Transparent" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{TemplateBinding Foreground}">
+                            <TextBlock.Inlines>
+                                <Run Text="Остаток " />
+                                <Run Text="{Binding Path=Coins.Count}" />
+                                <Run Text=" монет" />
+                            </TextBlock.Inlines>
+                        </TextBlock>
+                        <ProgressBar Grid.Row="1"
+                                     Grid.Column="1"
+                                     Maximum="{TemplateBinding Maximum}"
+                                     Minimum="0"
+                                     Value="{Binding Path=Coins.Count}"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     Background="{TemplateBinding Background}" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
