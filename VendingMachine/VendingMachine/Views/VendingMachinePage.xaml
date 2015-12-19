@@ -41,23 +41,23 @@
                        Text="{StaticResource AppName}"
                        TextWrapping="NoWrap" />
         </Grid>
-        <Grid Grid.Row="1" Margin="40,0">
+        <Grid Grid.Row="1" Margin="40,0,40,80">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <local:PurseUserControl Grid.Column="0"
-                                    Margin="0,0,40,0"
-                                    PurseStyle="{StaticResource MachinePurseStyle}"
-                                    CoinGroups="{Binding Path=VendingProcessor.MachinePurse.CoinGroups}"
-                                    Maximum="{Binding Path=VendingProcessor.MachinePurse.MaximumAmount}" />
+            <Border Background="{StaticResource MachineBackgroundBrush}" Grid.Column="0" Margin="0,0,40,0">
+                <local:PurseUserControl 
+                                        
+                                        PurseStyle="{StaticResource MachinePurseStyle}"
+                                        CoinGroups="{Binding Path=VendingProcessor.MachinePurse.CoinGroups}"
+                                        Maximum="{Binding Path=VendingProcessor.MachinePurse.MaximumAmount}" /></Border>
             <local:ProductsUserControl Grid.Column="1"
                                        Margin="40,0"
                                        BuyProductCommand="{Binding Path=BuyProduct}"
                                        ProductsSource="{Binding Path=ProductStore.ProductsGroup}" />
-            <!--<StackPanel Grid.Column="2" Background="#647687">-->
-            <StackPanel Grid.Column="2">
+            <StackPanel Grid.Column="2" Background="#647687">
                 <local:SumUserControl Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
                 <Button Command="{Binding Path=CalculateRentingCommand}">Сдача</Button>
                 <local:PurseUserControl CoinGroups="{Binding Path=ClientPurse.CoinGroups}"

@@ -1,15 +1,22 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="using:VendingMachine.Controls">
-
+    <SolidColorBrush x:Key="DarkProgressColor" Color="#5B6B7A" />
+    <SolidColorBrush x:Key="MachineBackgroundBrush" Color="#2C2C2C" />
     <Style x:Key="ClientPurseStyle" TargetType="controls:TemplatedPurse">
         <Setter Property="Background" Value="#939FAB" />
         <Setter Property="Foreground" Value="#C9CFD5" />
-        <Setter Property="IsButtonsEnabled" Value="True"></Setter>
+        <Setter Property="IsButtonsEnabled" Value="True" />
     </Style>
 
     <Style x:Key="MachinePurseStyle" TargetType="controls:TemplatedPurse">
-        <Setter Property="Foreground" Value="#5B6B7A" />
-        <Setter Property="IsButtonsEnabled" Value="False"></Setter>
+        <Setter Property="Foreground" Value="{StaticResource DarkProgressColor}" />
+        <Setter Property="IsButtonsEnabled" Value="False" />
     </Style>
+
+    <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+    </Style>
+
+
 </ResourceDictionary>
