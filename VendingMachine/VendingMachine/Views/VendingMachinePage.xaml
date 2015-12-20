@@ -58,8 +58,8 @@
                                        BuyProductCommand="{Binding Path=BuyProduct}"
                                        ProductsSource="{Binding Path=ProductStore.ProductsGroup}" />
             <StackPanel Grid.Column="2" Background="#647687">
-                <local:SumUserControl Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
-                <Button Command="{Binding Path=CalculateRentingCommand}">Сдача</Button>
+                <local:SumUserControl Margin="10,5" Deposit="{Binding Path=VendingProcessor.DepositAmount}" />
+                <Button Margin="5,10"  Command="{Binding Path=CalculateRentingCommand}">Сдача</Button>
                 <local:PurseUserControl CoinGroups="{Binding Path=ClientPurse.CoinGroups}"
                                         PurseStyle="{StaticResource ClientPurseStyle}"
                                         Maximum="{Binding Path=ClientPurse.MaximumAmount}"

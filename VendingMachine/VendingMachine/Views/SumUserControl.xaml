@@ -8,10 +8,15 @@
              d:DesignWidth="400"
              mc:Ignorable="d">
 
-    <TextBox Header="Внесённая сумма"
-             IsReadOnly="True"
-             PlaceholderText="Внесите сумму"
-             Text="{Binding Path=Deposit,
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Внесено:" FontSize="24"/>
+        <TextBlock Grid.Row="1" FontSize="48"
+                   Text="{Binding Path=Deposit,
                             Mode=TwoWay,
                             ElementName=SumControl}" />
+    </Grid>
 </UserControl>
