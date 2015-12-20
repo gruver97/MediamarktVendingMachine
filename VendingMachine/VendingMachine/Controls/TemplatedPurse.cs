@@ -21,6 +21,15 @@ namespace VendingMachine.Controls
         public static readonly DependencyProperty CountProperty = DependencyProperty.Register(
             "Count", typeof (int), typeof (TemplatedPurse), new PropertyMetadata(default(int)));
 
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+            "Text", typeof (string), typeof (TemplatedPurse), new PropertyMetadata(default(string)));
+
+        public string Text
+        {
+            get { return (string) GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
         public TemplatedPurse()
         {
             DefaultStyleKey = typeof (TemplatedPurse);
